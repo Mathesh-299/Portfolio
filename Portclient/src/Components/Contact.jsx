@@ -1,8 +1,15 @@
 import { Github, Handshake, Link, Linkedin, Mail, Phone, Terminal } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
+// import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Contact = () => {
     const [animate, setAnimate] = useState(false);
-
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        message: ""
+    })
     useEffect(() => {
         const timeout = setTimeout(() => setAnimate(true), 200);
         return () => clearTimeout(timeout);
@@ -11,11 +18,23 @@ const Contact = () => {
     const textAnimation = `transition-all duration-1000 ease-in ${animate ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'
         }`;
 
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        if (formData.email.length == 0 || formData.name.length == 0 || formData.message.length === 0) {
+            toast.error("Please fill all fields");
+        }
+        console.log(formData);
+        setFormData({
+            name: "",
+            email: "",
+            message: ""
+        })
+    }
     return (
         <>
             <div className="min-h-screen bg-black/90 px-6 py-12 text-white flex flex-col items-center">
-                {/* <img src={Profile} alt='Contact' className='w-32'/> */}
-                <Handshake/>
+                <Handshake />
                 <h1
                     className={`text-4xl font-bold mb-4 ${textAnimation}`}
                 >
@@ -62,20 +81,29 @@ const Contact = () => {
 
                 <div className={`w-full max-w-2xl bg-gray-800 p-8 rounded-lg shadow-lg ${textAnimation}`}>
                     <h2 className="text-2xl font-bold mb-4 text-center">Send a Message</h2>
-                    <form className="flex flex-col gap-4">
+                    <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
                         <input
                             type="text"
                             placeholder="Your Name"
+                            name='name'
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
                             className="p-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-green-400"
                         />
                         <input
                             type="email"
                             placeholder="Your Email"
+                            name='email'
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
                             className="p-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-green-400"
                         />
                         <textarea
                             rows="5"
                             placeholder="Your Message"
+                            value={formData.message}
+                            name='message'
+                            onChange={(e) => setFormData({ ...formData, [e.target.name]: e.target.value })}
                             className="p-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-green-400"
                         ></textarea>
                         <button
