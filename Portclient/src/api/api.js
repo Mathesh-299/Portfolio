@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const API = axios.create({
-    baseURL: "http://localhost:8000/api",
+    baseURL: "https://portfolio-server-a9ot.onrender.com/",
 });
 
 export default API;
