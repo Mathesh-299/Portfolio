@@ -13,8 +13,10 @@ DB()
             console.log(`Server running at ${port}`);
         })
     })
-    .catch(()=>{
+    .catch(() => {
         console.log("Something wrong....");
     });
 
-app.use('/api/project',require('./routes/project'));
+app.use('/api/project', require('./routes/project'));
+app.use("/api/query", require("./routes/query"));
+app.use("/api/auth", require("./routes/auth"));
