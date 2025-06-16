@@ -1,4 +1,4 @@
-import { BrushCleaning, Github, Link, Pencil, Plus, Terminal, Trash2 } from 'lucide-react';
+import { BrushCleaning, Github, Link, Plus, Terminal } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,13 +11,11 @@ const Projects = () => {
     const [showForm, setShowForm] = useState(false);
     const [showFormEdit, setShowFormEdit] = useState(false);
     const [submitting, setSubmitting] = useState(false);
-
     const [newProject, setNewProject] = useState({
         projectName: '',
         projectDes: '',
         projectLink: '',
     });
-
     const [editingProjectId, setEditingProjectId] = useState(null);
 
     const fetchData = async () => {
@@ -46,7 +44,6 @@ const Projects = () => {
             toast.warn("Please fill in all fields");
             return;
         }
-
         try {
             setSubmitting(true);
             await API.post('/project/addproject', newProject);
@@ -77,7 +74,6 @@ const Projects = () => {
             toast.warn("Please fill in all fields");
             return;
         }
-
         try {
             setSubmitting(true);
             await API.put(`/project/editproject/${editingProjectId}`, newProject);
@@ -94,9 +90,6 @@ const Projects = () => {
     };
 
     const handleDeleteSubmit = async (id) => {
-        const confirmed = window.confirm("Are you sure you want to delete this project?");
-        if (!confirmed) return;
-
         try {
             await API.delete(`/project/delete/${id}`);
             toast.success("👍🏻 Project deleted!");
@@ -108,9 +101,9 @@ const Projects = () => {
 
     return (
         <>
-            <div className="min-h-screen bg-black/90 px-6 py-12 text-white flex flex-col items-center">
-                <div className="w-full max-w-6xl flex justify-between items-center mb-6">
-                    <h1 className={`text-4xl font-bold ${textAnimation}`}>My Projects</h1>
+            <div className="min-h-screen bg-black/90 px-4 sm:px-6 lg:px-12 py-12 text-white flex flex-col items-center">
+                <div className="w-full max-w-6xl flex justify-between items-center mb-6 flex-wrap gap-4">
+                    <h1 className={`text-3xl sm:text-4xl font-bold ${textAnimation}`}>My Projects</h1>
                     <button
                         aria-label="Add Project"
                         onClick={() => setShowForm(true)}
@@ -128,28 +121,23 @@ const Projects = () => {
                 {loading ? (
                     <div className="text-lg text-gray-300">Loading projects...</div>
                 ) : (
-                    <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl ${textAnimation}`}>
+                    <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl ${textAnimation}`}>
                         {projects.length === 0 ? (
-                            <p className='text-2xl font-bold text-white flex gap-3 items-center justify-center'>
+                            <p className='text-2xl font-bold text-white flex gap-3 items-center justify-center col-span-full'>
                                 <BrushCleaning /> No Projects...
                             </p>
                         ) : (
                             projects.map((project, index) => (
                                 <div
                                     key={index}
-                                    className="bg-gray-900 border border-gray-700 p-6 rounded-2xl shadow-xl transform hover:scale-[1.03] transition-all duration-300 ease-in-out group"
+                                    className="bg-gray-900 border border-gray-700 p-6 rounded-2xl shadow-md hover:shadow-xl hover:scale-105 transition-transform duration-300"
                                 >
-                                    {/* Project Title */}
-                                    <h2 className="text-2xl font-bold text-purple-400 group-hover:text-purple-300 transition-colors duration-200 mb-2">
+                                    <h2 className="text-xl sm:text-2xl font-bold text-purple-400 mb-2">
                                         {project.projectName}
                                     </h2>
-
-                                    {/* Project Description */}
-                                    <p className="text-sm text-gray-300 leading-relaxed mb-4 line-clamp-3">
+                                    <p className="text-sm sm:text-base text-gray-300 leading-relaxed mb-4 line-clamp-3">
                                         {project.projectDes}
                                     </p>
-
-                                    {/* Project Link */}
                                     <a
                                         href={project.projectLink}
                                         target="_blank"
@@ -159,98 +147,15 @@ const Projects = () => {
                                         <Link className="w-4 h-4" />
                                         View Project
                                     </a>
-
-                                    {/* Action Buttons */}
-                                    <div className="mt-5 flex items-center gap-3">
-                                        {/* Edit Button */}
-                                        <button
-                                            onClick={() => editProject(project)}
-                                            aria-label="Edit Project"
-                                            className="group/edit relative p-2 rounded-full bg-gray-800 hover:bg-purple-600 text-white hover:scale-110 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400"
-                                        >
-                                            <Pencil className="w-4 h-4" />
-                                            <span className="absolute -top-9 left-1/2 -translate-x-1/2 bg-purple-600 text-xs text-white px-2 py-1 rounded opacity-0 group-hover/edit:opacity-100 transition pointer-events-none">
-                                                Edit
-                                            </span>
-                                        </button>
-
-                                        {/* Delete Button */}
-                                        <button
-                                            onClick={() => handleDeleteSubmit(project._id)}
-                                            aria-label="Delete Project"
-                                            className="group/delete relative p-2 rounded-full bg-gray-800 hover:bg-red-600 text-white hover:scale-110 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-400"
-                                        >
-                                            <Trash2 className="w-4 h-4" />
-                                            <span className="absolute -top-9 left-1/2 -translate-x-1/2 bg-red-600 text-xs text-white px-2 py-1 rounded opacity-0 group-hover/delete:opacity-100 transition pointer-events-none">
-                                                Delete
-                                            </span>
-                                        </button>
-                                    </div>
                                 </div>
-
                             ))
                         )}
                     </div>
                 )}
 
-                {/* Add/Edit Forms */}
-                {(showForm || showFormEdit) && (
-                    <div className="fixed inset-0 bg-black/80 flex justify-center items-center z-50">
-                        <div className="bg-gray-900 p-8 rounded-lg shadow-lg w-96">
-                            <h2 className="text-xl font-semibold mb-4 text-green-400">
-                                {showFormEdit ? 'Update Project' : 'Add New Project'}
-                            </h2>
-                            <form onSubmit={showFormEdit ? handleEditSubmit : handleAddProject} className="flex flex-col gap-4">
-                                <input
-                                    type="text"
-                                    placeholder="Project Name"
-                                    value={newProject.projectName}
-                                    onChange={(e) => setNewProject({ ...newProject, projectName: e.target.value })}
-                                    className="p-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-green-400"
-                                    required
-                                />
-                                <textarea
-                                    placeholder="Project Description"
-                                    rows="3"
-                                    value={newProject.projectDes}
-                                    onChange={(e) => setNewProject({ ...newProject, projectDes: e.target.value })}
-                                    className="p-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-green-400"
-                                    required
-                                ></textarea>
-                                <input
-                                    type="url"
-                                    placeholder="Project Link"
-                                    value={newProject.projectLink}
-                                    onChange={(e) => setNewProject({ ...newProject, projectLink: e.target.value })}
-                                    className="p-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-green-400"
-                                    required
-                                />
-                                <div className="flex justify-end gap-2">
-                                    <button
-                                        type="button"
-                                        onClick={() => {
-                                            setShowForm(false);
-                                            setShowFormEdit(false);
-                                        }}
-                                        className="px-4 py-2 rounded bg-red-500 hover:bg-red-600 text-white"
-                                    >
-                                        Cancel
-                                    </button>
-                                    <button
-                                        type="submit"
-                                        disabled={submitting}
-                                        className={`px-4 py-2 rounded font-semibold text-black ${submitting ? 'bg-green-300' : 'bg-green-400 hover:bg-green-500'}`}
-                                    >
-                                        {submitting ? "Processing..." : showFormEdit ? "Update" : "Add"}
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                )}
+                
             </div>
 
-            {/* Footer (unchanged) */}
             <footer>
                 <div className="flex bg-black/80 justify-center items-center py-3 gap-6">
                     <a href="https://github.com/Mathesh-299" target="_blank" rel="noopener noreferrer">
