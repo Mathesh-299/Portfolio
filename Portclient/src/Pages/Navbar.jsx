@@ -1,9 +1,11 @@
 import { Menu, ScanFace, User2, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
-    const location = useNavigate();
+    const location = useLocation();
+    const relocate = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [role, setRole] = useState("user");
@@ -21,16 +23,17 @@ const Navbar = () => {
         localStorage.setItem("isLoggedIn", "false");
         localStorage.setItem('role', "user");
         setIsLoggedIn(false);
+        toast.success("Logout")
         setRole("user");
-        location('/');
-        window.location.reload();
+        relocate('/');
+        // window.location.reload();
     };
 
     const routes = ['/', '/about', '/adminProject', '/contact'];
     const labels = ['01.Home', '02.About Me', '03.Project', '04.Contact'];
 
     return (
-        <div className="bg-black/90 text-white w-full z-50 relative">
+        <div className="bg-black/80 text-white w-full z-50 relative">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {isLoggedIn && role === 'admin' ? (

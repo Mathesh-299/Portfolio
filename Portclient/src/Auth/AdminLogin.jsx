@@ -18,7 +18,7 @@ const AdminLogin = () => {
             document.body.style.overflow = 'auto';
         };
     }, []);
-
+    const [loading, setLoading] = useState(false);
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -37,8 +37,8 @@ const AdminLogin = () => {
                 localStorage.setItem("Admin", JSON.stringify(response.data));
                 localStorage.setItem("role", response.data?.role);
                 toast.success("Successfully Logged In");
-                setFormData({ email: "", password: "" });
                 navigate("/");
+                setFormData({ email: "", password: "" });
                 window.location.reload();
             }
         } catch (error) {
@@ -127,9 +127,20 @@ const AdminLogin = () => {
                         type="submit"
                         className="flex items-center justify-center gap-2 bg-green-400 hover:bg-green-500 text-black font-semibold py-2 px-4 rounded-lg transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                         disabled={!formData.email || !formData.password}
+                        onClick={() => setLoading(true)}
                     >
                         <LockKeyhole />
-                        Login
+                        {
+                            loading ? (
+                                <span>
+                                    Loading...
+                                </span>
+                            ) : (
+                                <span>
+                                    Login
+                                </span>
+                            )
+                        }
                     </button>
 
                     {/* Optional: Error Message */}
