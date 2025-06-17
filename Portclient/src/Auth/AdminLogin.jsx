@@ -1,7 +1,8 @@
 import { Eye, EyeOff, LockKeyhole, ShieldX, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import toast from 'react-hot-toast';
+// import toast from 'react-hot-toast';import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import API from '../api/api';
 

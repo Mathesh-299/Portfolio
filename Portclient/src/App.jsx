@@ -11,7 +11,7 @@ import Projects from "./Components/Projects";
 import Navbar from "./Pages/Navbar";
 import Queries from './Pages/Queries';
 const App = () => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    // const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     return (
         <>
             <ToastContainer />
