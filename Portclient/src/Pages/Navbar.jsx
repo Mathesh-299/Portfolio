@@ -1,9 +1,9 @@
 import { Menu, ScanFace, User2, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-    const location = useLocation();
+    const location = useNavigate();
     const [menuOpen, setMenuOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [role, setRole] = useState("user");
@@ -22,8 +22,8 @@ const Navbar = () => {
         localStorage.setItem('role', "user");
         setIsLoggedIn(false);
         setRole("user");
-        window.location.reload();
         location('/');
+        window.location.reload();
     };
 
     const routes = ['/', '/about', '/adminProject', '/contact'];
