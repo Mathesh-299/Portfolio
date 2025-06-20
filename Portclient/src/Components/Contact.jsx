@@ -123,7 +123,7 @@ const Contact = () => {
                 </section>
             </main>
 
-            <footer className="bg-black/80 text-gray-400 border-t">
+            <footer className="bg-black/80 text-gray-400">
                 <div className="flex justify-center gap-6 py-4">
                     <a href="https://github.com/Mathesh-299" target="_blank" rel="noopener noreferrer" title="GitHub">
                         <Github className="hover:text-purple-500" />

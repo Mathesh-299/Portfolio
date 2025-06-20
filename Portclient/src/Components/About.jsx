@@ -14,7 +14,7 @@ const About = () => {
 
     const handleResumeDownload = () => {
         const link = document.createElement('a');
-        link.href = '/Mathesh M-Resume.pdf';
+        link.href = '/Resume with portfolio link.pdf';
         link.download = 'Mathesh_Resume.pdf';
         document.body.appendChild(link);
         link.click();
