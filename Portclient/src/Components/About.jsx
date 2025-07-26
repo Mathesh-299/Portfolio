@@ -13,7 +13,7 @@ const About = () => {
 
     const handleResumeDownload = () => {
         const link = document.createElement('a');
-        link.href = '/Resume_Mathesh.pdf';
+        link.href = '/Mathesh M - 714022205060.pdf';
         link.download = 'Mathesh_Resume.pdf';
         document.body.appendChild(link);
         link.click();
@@ -59,7 +59,7 @@ const About = () => {
                     </button>
 
                     <a
-                        href="/Resume_Mathesh.pdf"
+                        href="/Mathesh M - 714022205060.pdf"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="italic text-xl flex flex-row gap-2 justify-center items-center  font-bold hover:text-purple-600 text-white transition hover:scale-105 border-4 px-5 py-3 border-purple-600 rounded-2xl hover:border-purple-500 hover:bg-white"
