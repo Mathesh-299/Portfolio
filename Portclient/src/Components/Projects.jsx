@@ -8,7 +8,8 @@ const Projects = () => {
     const [animate, setAnimate] = useState(false);
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [showForm, setShowForm] = useState(false);
+    
+    const [showToast, setShowToast] = useState(false);
     const [showFormEdit, setShowFormEdit] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     const [newProject, setNewProject] = useState({
@@ -24,7 +25,10 @@ const Projects = () => {
             const response = await API.get("/project/all");
             setProjects(response.data);
         } catch (error) {
-            toast.error("Error fetching projects.");
+            if(!showToast){
+                toast.error("Error fetching projects.");
+                setShowToast(!showToast);
+            }
         } finally {
             setLoading(false);
         }
@@ -153,7 +157,7 @@ const Projects = () => {
                     </div>
                 )}
 
-                
+
             </div>
 
             <footer>

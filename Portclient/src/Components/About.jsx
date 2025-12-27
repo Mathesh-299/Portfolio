@@ -37,7 +37,7 @@ const About = () => {
                 <section className={`max-w-5xl w-full mt-12 ${textAnimation}`}>
                     <h3 className="text-3xl font-bold text-white mb-6 text-start">My Skills</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                        {["HTML5", "CSS3", "JavaScript", "React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "Git & GitHub", "REST APIs", "JSON"].map((skill, index) => (
+                        {["HTML5", "CSS3", "JavaScript", "React.js", "Node.js", "Express.js", "MongoDB","Java", "Tailwind CSS", "Git & GitHub", "REST APIs", "JSON","MySQL","JWT Authentication"].map((skill, index) => (
                             <div
                                 key={index}
                                 className="bg-gray-800 text-purple-400 font-semibold rounded-xl p-3 text-center transition transform hover:scale-105 hover:bg-purple-100 hover:text-black shadow-md"

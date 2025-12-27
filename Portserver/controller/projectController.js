@@ -36,6 +36,7 @@ exports.getprojects = async (req, res) => {
                 EX: 3600,
                 NX: true
             });
+            console.log(projects);
             return res.status(200).json(projects);
         }
     }

@@ -9,8 +9,6 @@ const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [role, setRole] = useState("user");
-
-    // Sync localStorage values into React state
     useEffect(() => {
         const loginStatus = localStorage.getItem("isLoggedIn") === "true";
         const userRole = localStorage.getItem("role") || "user";
