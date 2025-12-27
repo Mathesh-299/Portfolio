@@ -1,7 +1,7 @@
 const jwttoken = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const Project = require("../model/Project");
-
+const redisClient = require("../utils/redis");
 exports.addproject = async (req, res) => {
     try {
         const { projectName, projectDes, projectLink } = req.body;
@@ -20,10 +20,26 @@ exports.addproject = async (req, res) => {
 }
 
 exports.getprojects = async (req, res) => {
+    // try {
+    //     const response = await Project.find();
+    //     res.status(200).json(response);
+    // } catch (error) {
+    //     res.status(500).json({ message: "Fetching Error" });
+    // }
     try {
-        const response = await Project.find();
-        res.status(200).json(response);
-    } catch (error) {
+        const cacheProjects = await redisClient.get("projects");
+        if (cacheProjects) {
+            return res.status(200).json(JSON.parse(cacheProjects));
+        } else {
+            const projects = await Project.find();
+            await redisClient.set("projects", JSON.stringify(projects), {
+                EX: 3600,
+                NX: true
+            });
+            return res.status(200).json(projects);
+        }
+    }
+    catch (error) {
         res.status(500).json({ message: "Fetching Error" });
     }
 }
