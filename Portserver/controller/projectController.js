@@ -1,7 +1,6 @@
 const jwttoken = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const Project = require("../model/Project");
-const redisClient = require("../utils/redis");
 exports.addproject = async (req, res) => {
     try {
         const { projectName, projectDes, projectLink } = req.body;
@@ -22,7 +21,7 @@ exports.addproject = async (req, res) => {
 exports.getprojects = async (req, res) => {
     try {
         const response = await Project.find();
-        res.status(200).json(response);
+        res.status(200).json({ response });
     } catch (error) {
         res.status(500).json({ message: "Fetching Error" });
     }
