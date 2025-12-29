@@ -25,7 +25,8 @@ const Projects = () => {
         try {
             setLoading(true);
             const response = await API.get("/project/all");
-            setProjects(response.data);
+            console.log(response)
+            setProjects(Array.isArray(response.data) ? response.data : response.data.response);
         } catch (error) {
             toast.error("Error fetching projects.");
         } finally {
