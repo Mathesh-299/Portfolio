@@ -20,29 +20,29 @@ exports.addproject = async (req, res) => {
 }
 
 exports.getprojects = async (req, res) => {
-    // try {
-    //     const response = await Project.find();
-    //     res.status(200).json(response);
-    // } catch (error) {
-    //     res.status(500).json({ message: "Fetching Error" });
-    // }
     try {
-        const cacheProjects = await redisClient.get("projects");
-        if (cacheProjects) {
-            return res.status(200).json(JSON.parse(cacheProjects));
-        } else {
-            const projects = await Project.find();
-            await redisClient.set("projects", JSON.stringify(projects), {
-                EX: 3600,
-                NX: true
-            });
-            console.log(projects);
-            return res.status(200).json(projects);
-        }
-    }
-    catch (error) {
+        const response = await Project.find();
+        res.status(200).json(response);
+    } catch (error) {
         res.status(500).json({ message: "Fetching Error" });
     }
+    // try {
+    //     const cacheProjects = await redisClient.get("projects");
+    //     if (cacheProjects) {
+    //         return res.status(200).json(JSON.parse(cacheProjects));
+    //     } else {
+    //         const projects = await Project.find();
+    //         await redisClient.set("projects", JSON.stringify(projects), {
+    //             EX: 3600,
+    //             NX: true
+    //         });
+    //         console.log(projects);
+    //         return res.status(200).json(projects);
+    //     }
+    // }
+    // catch (error) {
+    //     res.status(500).json({ message: "Fetching Error" });
+    // }
 }
 
 
