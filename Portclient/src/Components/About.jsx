@@ -13,7 +13,7 @@ const About = () => {
 
     const handleResumeDownload = () => {
         const link = document.createElement('a');
-        link.href = '/Mathesh M - 714022205060.pdf';
+        link.href = '/Mathesh_M_Resume.pdf';
         link.download = 'Mathesh_Resume.pdf';
         document.body.appendChild(link);
         link.click();
@@ -37,7 +37,7 @@ const About = () => {
                 <section className={`max-w-5xl w-full mt-12 ${textAnimation}`}>
                     <h3 className="text-3xl font-bold text-white mb-6 text-start">My Skills</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                        {["HTML5", "CSS3", "JavaScript", "React.js", "Node.js", "Express.js", "MongoDB","Java", "Tailwind CSS", "Git & GitHub", "REST APIs", "JSON","MySQL","JWT Authentication"].map((skill, index) => (
+                        {["HTML5", "CSS3", "JavaScript", "React.js", "Node.js", "Express.js", "MongoDB", "Java", "Tailwind CSS", "Git & GitHub", "REST APIs", "JSON", "MySQL", "JWT Authentication"].map((skill, index) => (
                             <div
                                 key={index}
                                 className="bg-gray-800 text-purple-400 font-semibold rounded-xl p-3 text-center transition transform hover:scale-105 hover:bg-purple-100 hover:text-black shadow-md"
@@ -59,7 +59,7 @@ const About = () => {
                     </button>
 
                     <a
-                        href="/Mathesh M - 714022205060.pdf"
+                        href="/Mathesh_M_Resume.pdf"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="italic text-xl flex flex-row gap-2 justify-center items-center  font-bold hover:text-purple-600 text-white transition hover:scale-105 border-4 px-5 py-3 border-purple-600 rounded-2xl hover:border-purple-500 hover:bg-white"

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Image from '../assets/img/Me.jpg';
+import Image from '../assets/img/Mathesh.jpg';
 
 const Home = () => {
     const [visible, setVisible] = useState(false);
@@ -22,11 +22,10 @@ const Home = () => {
                     <img
                         src={Image}
                         alt="Profile"
-                        className="w-40 h-40 md:w-64 md:h-64 rounded-full border-2 border-red-400 p-2 object-cover"
+                        className="w-40 h-40 md:w-64 md:h-64 rounded-full border-2 border-blue-700 p-2 object-cover"
                     />
                 </div>
 
-                {/* ✅ Text Below Image in Mobile, Left in Desktop */}
                 <div
                     className={`
                         flex flex-col justify-center
